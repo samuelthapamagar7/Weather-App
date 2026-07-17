@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mausam/screens/home_screen.dart';
+import 'package:mausam/screens/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Mausam',
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+      home: SplashScreen(),
     );
   }
 }

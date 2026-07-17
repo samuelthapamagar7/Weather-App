@@ -19,8 +19,8 @@ class _HomeScreenState extends State<HomeScreen> {
           padding: const EdgeInsets.all(25),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
-            // crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              //search button
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -45,6 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ],
               ),
+              //city name
               Text(
                 'London',
                 style: GoogleFonts.poppins(
@@ -52,10 +53,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
+              //weather description
               Text('Cloudy', style: GoogleFonts.poppins()),
               SizedBox(height: 50),
               Image.asset('assets/images/cloudy.png'),
               Spacer(),
+              //temperature
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -63,13 +66,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   Text(
                     '22 °',
                     style: GoogleFonts.poppins(
-                      fontSize: 48,
+                      fontSize: 32,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ],
               ),
               Spacer(),
+              //weather indicators
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
