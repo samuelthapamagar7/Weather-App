@@ -4,13 +4,31 @@ import 'package:google_fonts/google_fonts.dart';
 import 'city_search_screen.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({required this.weatherData, super.key});
+
+  final Map<String, dynamic> weatherData;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  String cityName = 'No city';
+  String weatherDescription = 'No description found';
+  @override
+  void initState() {
+    super.initState();
+    init();
+  }
+
+  // weather[0].main
+  init() {
+    cityName = widget.weatherData['name'];
+    weatherDescription = widget.weatherData['weather'][0]['main'];
+
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,14 +65,14 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               //city name
               Text(
-                'London',
+                cityName,
                 style: GoogleFonts.poppins(
                   fontSize: 32,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               //weather description
-              Text('Cloudy', style: GoogleFonts.poppins()),
+              Text(weatherDescription, style: GoogleFonts.poppins()),
               SizedBox(height: 50),
               Image.asset('assets/images/cloudy.png'),
               Spacer(),

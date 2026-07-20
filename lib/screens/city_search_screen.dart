@@ -33,10 +33,10 @@ class CitySearchScreen extends StatelessWidget {
                   SizedBox(width: 10),
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => HomeScreen()),
-                      );
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(builder: (context) => HomeScreen()),
+                      // );
                     },
                     child: Container(
                       height: 54,

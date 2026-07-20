@@ -16,20 +16,21 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    getWeatherData();
+    init();
   }
 
-  getWeatherData() async {
-    WeatherServices().getWeatherData();
+  void init() async {
+    var weatherData = await WeatherServices().getWeatherData();
 
-    // print('Weather data received. Go to home screen');
-    // Navigator.push(
-    //   context,
-    //   MaterialPageRoute(builder: (context) => HomeScreen()),
-    // );
+    // final cityName = weatherData?['name'] as String;
+    // print(cityName);
 
-    //
-    //
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => HomeScreen(weatherData: weatherData!),
+      ),
+    );
   }
 
   @override
