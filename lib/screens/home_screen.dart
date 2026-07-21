@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mausam/weather_model.dart';
 
 import 'city_search_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({required this.weatherData, super.key});
 
-  final Map<String, dynamic> weatherData;
+  final WeatherModel weatherData;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -15,6 +16,13 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   String cityName = 'No city';
   String weatherDescription = 'No description found';
+  double temperature = 0;
+  int humidity = 0;
+  double windSpeed = 0;
+  int pressure = 0;
+  String image = 'assets/images/sunny.png';
+  String iconUrl = 'https://openweathermap.org/payload/api/media/file/03d.png';
+
   @override
   void initState() {
     super.initState();
@@ -23,8 +31,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
   // weather[0].main
   init() {
-    cityName = widget.weatherData['name'];
-    weatherDescription = widget.weatherData['weather'][0]['main'];
+    cityName = widget.weatherData.name;
+    weatherDescription = widget.weatherData.weather[0].description;
+    temperature = widget.weatherData.main.temp;
+    humidity = widget.weatherData.main.humidity;
+    windSpeed = widget.weatherData.wind.speed;
+    pressure = widget.weatherData.main.pressure;
+    String icon = widget.weatherData.weather[0].icon;
+    iconUrl = 'https://openweathermap.org/payload/api/media/file/$icon.png';
 
     setState(() {});
   }
@@ -74,7 +88,8 @@ class _HomeScreenState extends State<HomeScreen> {
               //weather description
               Text(weatherDescription, style: GoogleFonts.poppins()),
               SizedBox(height: 50),
-              Image.asset('assets/images/cloudy.png'),
+              // Image.asset(image),
+              Image.network(iconUrl, scale: 0.3),
               Spacer(),
               //temperature
               Row(
@@ -82,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   SizedBox(width: 35),
                   Text(
-                    '22 °',
+                    '$temperature °',
                     style: GoogleFonts.poppins(
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
@@ -100,7 +115,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Image.asset('assets/icons/wind.png', height: 25),
                       SizedBox(height: 5),
                       Text(
-                        '106 m/sec',
+                        '$windSpeed m/sec',
                         style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
                       ),
                     ],
@@ -110,7 +125,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Image.asset('assets/icons/humidity.png', height: 25),
                       SizedBox(height: 5),
                       Text(
-                        '11%',
+                        '$humidity%',
                         style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
                       ),
                     ],
@@ -120,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Image.asset('assets/icons/atm_pressure.png', height: 25),
                       SizedBox(height: 5),
                       Text(
-                        '25 hPa',
+                        '$pressure hPa',
                         style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
                       ),
                     ],

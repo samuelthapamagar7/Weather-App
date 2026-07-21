@@ -25,12 +25,14 @@ class _SplashScreenState extends State<SplashScreen> {
     // final cityName = weatherData?['name'] as String;
     // print(cityName);
 
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => HomeScreen(weatherData: weatherData!),
-      ),
-    );
+    if (weatherData != null) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => HomeScreen(weatherData: weatherData),
+        ),
+      );
+    }
   }
 
   @override

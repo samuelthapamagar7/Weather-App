@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mausam/screens/home_screen.dart';
 
 class CitySearchScreen extends StatelessWidget {
   const CitySearchScreen({super.key});
