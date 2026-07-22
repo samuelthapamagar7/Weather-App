@@ -1,7 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:mausam/screens/home_screen.dart';
+import 'package:mausam/services/weather_services.dart';
 
-class CitySearchScreen extends StatelessWidget {
+class CitySearchScreen extends StatefulWidget {
   const CitySearchScreen({super.key});
+
+  @override
+  State<CitySearchScreen> createState() => _CitySearchScreenState();
+}
+
+class _CitySearchScreenState extends State<CitySearchScreen> {
+  String cityName = '';
+
+  void getCityData() async {
+    WeatherServices weatherServices = WeatherServices();
+    var weatherData = await weatherServices.getWeatherDataByCity(
+      cityName: cityName,
+    );
+
+    if (weatherData != null) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => HomeScreen(weatherData: weatherData),
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +40,6 @@ class CitySearchScreen extends StatelessWidget {
                 children: [
                   Expanded(
                     child: TextField(
-                      style: TextStyle(color: Colors.white),
                       decoration: InputDecoration(
                         hintText: 'Enter the city name',
                         enabledBorder: OutlineInputBorder(
@@ -27,16 +51,19 @@ class CitySearchScreen extends StatelessWidget {
                           borderSide: BorderSide(color: Colors.blue),
                         ),
                       ),
+                      onChanged: (val) {
+                        cityName = val;
+                        //
+                      },
+
+                      onSubmitted: (val) {
+                        getCityData();
+                      },
                     ),
                   ),
                   SizedBox(width: 10),
                   GestureDetector(
-                    onTap: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(builder: (context) => HomeScreen()),
-                      // );
-                    },
+                    onTap: getCityData,
                     child: Container(
                       height: 54,
                       width: 54,
@@ -50,6 +77,7 @@ class CitySearchScreen extends StatelessWidget {
                 ],
               ),
               Spacer(),
+
               Image.asset('assets/images/city.png'),
               SizedBox(height: 50),
               Text(

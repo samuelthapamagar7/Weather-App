@@ -20,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int humidity = 0;
   double windSpeed = 0;
   int pressure = 0;
-  String image = 'assets/images/sunny.png';
+  String image = 'assets/images/rainy.png';
   String iconUrl = 'https://openweathermap.org/payload/api/media/file/03d.png';
 
   @override
@@ -39,6 +39,12 @@ class _HomeScreenState extends State<HomeScreen> {
     pressure = widget.weatherData.main.pressure;
     String icon = widget.weatherData.weather[0].icon;
     iconUrl = 'https://openweathermap.org/payload/api/media/file/$icon.png';
+
+    if (temperature > 30) {
+      image = 'assets/images/sunny.png';
+    } else if (temperature > 22) {
+      image = 'assets/images/cloudy.png';
+    }
 
     setState(() {});
   }
@@ -88,8 +94,8 @@ class _HomeScreenState extends State<HomeScreen> {
               //weather description
               Text(weatherDescription, style: GoogleFonts.poppins()),
               SizedBox(height: 50),
-              // Image.asset(image),
-              Image.network(iconUrl, scale: 0.3),
+              Image.asset(image),
+              // Image.network(iconUrl, scale: 0.3),
               Spacer(),
               //temperature
               Row(
